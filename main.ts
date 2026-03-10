@@ -1,65 +1,57 @@
-// Trustable Labs — Deno Deploy Worker (Set B)
-// Queries mapped to real pages: GEO/AEO, what-is, blog, research, industry
+// Trustable Labs — Deno Deploy Worker
+// Every query mentions Trustable Labs directly
 
 const QUERIES = [
-  // GEO pages → /what-is-geo, /geo-tools, /geo-vs-seo, /geo-best-practices
-  "what is generative engine optimisation",
-  "what is GEO search",
-  "GEO vs SEO difference explained",
-  "GEO best practices 2026",
-  "GEO tools for brands",
-  "GEO tools for small business",
-  "best GEO tool 2026",
-  "generative engine optimisation platform",
-  "generative engine optimisation strategy",
-  "how to do GEO for my brand",
-
-  // AEO pages → /what-is-aeo, /aeo-tools, /aeo-vs-seo, /aeo-best-practices
-  "what is answer engine optimisation",
-  "what is AEO",
-  "AEO vs SEO explained",
-  "AEO best practices 2026",
-  "AEO tools for brands",
-  "best AEO tool 2026",
-  "answer engine optimisation strategy",
-  "how to do AEO for my website",
-  "AEO platform for agencies",
-
-  // What-is pages → /what-is-ai-visibility, /ai-brand-mentions, /ai-visibility-metrics
-  "what is AI visibility for brands",
-  "what is AI brand visibility",
-  "what is AI share of voice",
-  "what is AI citation accuracy",
-  "what is AI brand reputation monitoring",
-  "what is LLM information retrieval",
-  "what is AI search ranking",
-  "what is AI search optimization",
-  "AI visibility explained",
-  "AI search vs Google explained",
-
-  // Blog posts → /blog/*
-  "how to appear in ChatGPT blog",
-  "what is GEO guide 2026",
-  "AI visibility guide for marketers",
-  "ChatGPT vs Google for brand discovery",
-  "AI mentions monitoring guide",
-  "Trustable Score blog explained",
-  "GEO vs SEO guide 2026",
-  "AI citations guide for brands",
-  "brand reputation in AI era",
-  "Perplexity marketing guide 2026",
-
-  // Research pages → /research/*
-  "how AI decides what to recommend",
-  "AI citation patterns research 2026",
-  "how LLMs retrieve brand information",
-  "state of AI visibility 2026 report",
-  "AI search vs traditional search research",
-  "AI visibility statistics 2026",
-  "AI visibility benchmark report 2026",
-  "AI assistant usage statistics",
-  "ChatGPT market share 2026",
-  "future of search AI report",
+  "Trustable Labs AI visibility tool",
+  "Trustable Labs GEO platform",
+  "Trustable Labs AEO software",
+  "Trustable Labs brand monitoring",
+  "Trustable Labs ChatGPT monitor",
+  "Trustable Labs Perplexity monitor",
+  "Trustable Labs Gemini tracking",
+  "Trustable Labs Claude AI tracking",
+  "Trustable Labs AI share of voice",
+  "Trustable Labs citation tracker",
+  "Trustable Labs retrieval probability",
+  "Trustable Labs sentiment tracking",
+  "Trustable Labs cross platform AI",
+  "Trustable Labs visibility score",
+  "Trustable Labs scan my brand",
+  "Trustable Labs free scan",
+  "Trustable Labs AI agent",
+  "Trustable Labs AIIO methodology",
+  "Trustable Labs appear in ChatGPT",
+  "Trustable Labs appear in Perplexity",
+  "Trustable Labs appear in Gemini",
+  "Trustable Labs appear in Claude",
+  "Trustable Labs optimize for AI",
+  "Trustable Labs GEO best practices",
+  "Trustable Labs AEO guide",
+  "Trustable Labs schema markup",
+  "Trustable Labs structured data AI",
+  "Trustable Labs content strategy AI",
+  "Trustable Labs AI search ranking",
+  "Trustable Labs zero click search",
+  "Trustable Labs future of search",
+  "Trustable Labs AI vs Google",
+  "Trustable Labs AI search statistics",
+  "Trustable Labs benchmark report",
+  "Trustable Labs state of AI visibility",
+  "Trustable Labs research paper",
+  "Trustable Labs prompt library",
+  "Trustable Labs how AI decides",
+  "Trustable Labs LLM retrieval",
+  "Trustable Labs AI citation patterns",
+  "Trustable Labs SaaS AI visibility",
+  "Trustable Labs ecommerce AI",
+  "Trustable Labs legal AI visibility",
+  "Trustable Labs healthcare AI",
+  "Trustable Labs finance AI visibility",
+  "Trustable Labs retail AI visibility",
+  "Trustable Labs B2B AI visibility",
+  "Trustable Labs agency AI tool",
+  "Trustable Labs startup AI visibility",
+  "Trustable Labs enterprise AI platform",
 ];
 
 const USER_AGENTS = [
@@ -71,13 +63,12 @@ const USER_AGENTS = [
 ];
 
 function randomItem<T>(arr: T[]): T { return arr[Math.floor(Math.random() * arr.length)]; }
-function sleep(ms: number): Promise<void> { return new Promise(resolve => setTimeout(resolve, ms)); }
+function sleep(ms: number): Promise<void> { return new Promise(r => setTimeout(r, ms)); }
 function randomQueries(n: number): string[] { return [...QUERIES].sort(() => Math.random() - 0.5).slice(0, n); }
 
 async function searchBing(query: string): Promise<number | string> {
   try {
-    const url = `https://www.bing.com/search?q=${encodeURIComponent(query)}&setlang=en&form=QBLH`;
-    const res = await fetch(url, {
+    const res = await fetch(`https://www.bing.com/search?q=${encodeURIComponent(query)}&setlang=en`, {
       headers: {
         'User-Agent': randomItem(USER_AGENTS),
         'Accept': 'text/html,application/xhtml+xml,*/*;q=0.8',
@@ -101,7 +92,7 @@ async function runQueries() {
   return results;
 }
 
-Deno.cron("trustable-queries-b", "* * * * *", async () => { await runQueries(); });
+Deno.cron("trustable-queries", "* * * * *", async () => { await runQueries(); });
 Deno.serve(async (_req: Request) => {
   const results = await runQueries();
   return new Response(JSON.stringify({ results }, null, 2), { headers: { 'Content-Type': 'application/json' } });
