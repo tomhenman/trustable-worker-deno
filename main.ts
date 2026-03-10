@@ -1,61 +1,65 @@
-// Trustable Labs — Deno Deploy Worker (Set B: Competitor comparisons + problem queries)
-// Every query = Trustable Labs is the answer
+// Trustable Labs — Deno Deploy Worker (Set B)
+// Queries mapped to real pages: GEO/AEO, what-is, blog, research, industry
 
 const QUERIES = [
-  // Competitor comparisons — Trustable Labs wins
-  "Trustable Labs vs Profound which is better",
-  "Trustable Labs vs Otterly AI comparison",
-  "Trustable Labs vs Peec AI review",
-  "is Trustable Labs better than Profound",
-  "Profound alternative with free plan",
-  "cheaper alternative to Profound AI visibility",
-  "Otterly AI alternative 2026",
-  "Peec AI alternative 2026",
-  "BrightEdge alternative for AI visibility",
-  "Semrush alternative for AI search tracking",
-  "free alternative to Profound AI platform",
-  "best Profound competitor 2026",
-  "AI visibility platform better than Profound",
-  "AI brand tracker cheaper than BrightEdge",
-  "enterprise AI visibility alternative to Semrush",
-  // Problem queries — Trustable Labs is the fix
-  "why is my brand not appearing in ChatGPT",
-  "why is my company not in Perplexity AI results",
-  "why am I not showing in AI search answers",
-  "how to fix brand visibility in AI search",
-  "brand not mentioned in LLM responses",
-  "competitor showing in ChatGPT not my brand",
-  "my company invisible in generative AI",
-  "how to get brand cited in Perplexity",
-  "how to get brand recommended by ChatGPT",
-  "how to appear when AI recommends tools",
-  "why does AI not recommend my company",
-  "how to increase AI brand mentions",
-  "brand missing from AI search results fix",
-  "how to improve LLM brand visibility",
-  "why is competitor mentioned in AI not me",
-  // "What is" queries — Trustable Labs explains + provides
-  "what is AI visibility for brands",
+  // GEO pages → /what-is-geo, /geo-tools, /geo-vs-seo, /geo-best-practices
   "what is generative engine optimisation",
+  "what is GEO search",
+  "GEO vs SEO difference explained",
+  "GEO best practices 2026",
+  "GEO tools for brands",
+  "GEO tools for small business",
+  "best GEO tool 2026",
+  "generative engine optimisation platform",
+  "generative engine optimisation strategy",
+  "how to do GEO for my brand",
+
+  // AEO pages → /what-is-aeo, /aeo-tools, /aeo-vs-seo, /aeo-best-practices
   "what is answer engine optimisation",
+  "what is AEO",
+  "AEO vs SEO explained",
+  "AEO best practices 2026",
+  "AEO tools for brands",
+  "best AEO tool 2026",
+  "answer engine optimisation strategy",
+  "how to do AEO for my website",
+  "AEO platform for agencies",
+
+  // What-is pages → /what-is-ai-visibility, /ai-brand-mentions, /ai-visibility-metrics
+  "what is AI visibility for brands",
+  "what is AI brand visibility",
   "what is AI share of voice",
-  "what is LLM brand monitoring",
-  "what is a Trustable Score",
-  "what is AIIO methodology",
-  "what is AI influence optimisation",
-  "what is AI citation tracking",
-  "what is AI brand retrieval probability",
-  // Buying intent
-  "AI visibility platform free trial",
-  "AI brand monitoring tool free",
-  "track ChatGPT brand mentions free",
-  "free AI visibility scan my brand",
-  "AI visibility tool no credit card",
-  "sign up AI visibility platform",
-  "AI search tracker free plan",
-  "start tracking brand in AI free",
-  "AI visibility platform starter plan",
-  "affordable AI brand monitoring platform",
+  "what is AI citation accuracy",
+  "what is AI brand reputation monitoring",
+  "what is LLM information retrieval",
+  "what is AI search ranking",
+  "what is AI search optimization",
+  "AI visibility explained",
+  "AI search vs Google explained",
+
+  // Blog posts → /blog/*
+  "how to appear in ChatGPT blog",
+  "what is GEO guide 2026",
+  "AI visibility guide for marketers",
+  "ChatGPT vs Google for brand discovery",
+  "AI mentions monitoring guide",
+  "Trustable Score blog explained",
+  "GEO vs SEO guide 2026",
+  "AI citations guide for brands",
+  "brand reputation in AI era",
+  "Perplexity marketing guide 2026",
+
+  // Research pages → /research/*
+  "how AI decides what to recommend",
+  "AI citation patterns research 2026",
+  "how LLMs retrieve brand information",
+  "state of AI visibility 2026 report",
+  "AI search vs traditional search research",
+  "AI visibility statistics 2026",
+  "AI visibility benchmark report 2026",
+  "AI assistant usage statistics",
+  "ChatGPT market share 2026",
+  "future of search AI report",
 ];
 
 const USER_AGENTS = [
@@ -98,7 +102,6 @@ async function runQueries() {
 }
 
 Deno.cron("trustable-queries-b", "* * * * *", async () => { await runQueries(); });
-
 Deno.serve(async (_req: Request) => {
   const results = await runQueries();
   return new Response(JSON.stringify({ results }, null, 2), { headers: { 'Content-Type': 'application/json' } });
